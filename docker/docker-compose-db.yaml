@@ -9,17 +9,12 @@ services:
     image: mongo:latest
     container_name: mongo-db
     restart: always
-    command: --auth --config /etc/mongo/mongod.conf
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: adminpw
-      MONGO_INITDB_DATABASE: mydb
-      TZ: Asia/Taipei
     volumes: 
       - ../mongodb/configdb:/data/configdb
       - ../mongodb/data:/data/db
       - ../mongodb/mongod.conf:/etc/mongo/mongod.conf
-    ports: 
-      - '27017:27017'
+    expose:
+      - 27017
     networks:
       - reserve-utsa
+    user: "1000:1000"
