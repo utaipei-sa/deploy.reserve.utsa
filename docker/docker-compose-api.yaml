@@ -1,0 +1,17 @@
+version: "3.9"
+
+networks:
+  reserve-utsa:
+    driver: bridge
+
+services:
+  api:
+    image: ghcr.io/utaipei-sa/api.reserve.utsa:${BACKEND_VERSION}
+    restart: always
+    container_name: api
+    expose:
+      - 3000
+    env_file:
+      - ../.env
+    networks:
+      - reserve-utsa
