@@ -1,11 +1,9 @@
-version: "3.9"
-
 networks:
   reserve-utsa:
     driver: bridge
 
 services:
-  web:
+  ui:
     image: ghcr.io/utaipei-sa/reserve.utsa:${FRONTEND_VERSION}
     restart: always
     container_name: ui
