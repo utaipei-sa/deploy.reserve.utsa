@@ -15,7 +15,7 @@ if [ "$CMD" == "SERVICE_UP" -a "$#" == "3" ]; then
                     -f docker/docker-compose-db.yaml \
                     -f docker/docker-compose-api.yaml \
                     -f docker/docker-compose-ui.yaml \
-                    -f docker/docker-compose-nginx.yaml up -d 
+                    --env-file .env -f docker/docker-compose-nginx.yaml up -d 
 
 elif [ "$CMD" == "UPDATE_IMAGE" -a "$#" == "3" ]; then
     BUILD_BACKEND_VERSION=${2}
