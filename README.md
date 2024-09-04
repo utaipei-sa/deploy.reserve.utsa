@@ -9,4 +9,4 @@
 可以通过以下格式从命令行执行此脚本：
 
 ```bash
-./script.sh <COMMAND> <BACKEND_VERSION> <FRONTEND_VERSION>
+./scripts/cicd.sh <COMMAND> <BACKEND_VERSION> <FRONTEND_VERSION>
