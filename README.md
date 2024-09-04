@@ -74,3 +74,30 @@
    ```bash
    ./scripts/cicd.sh UPDATE_IMAGE 1.1.0 1.1.0-test
    ```
+
+4. **GitHub Container Registry（GHCR）授權**
+
+要從 GHCR 拉取鏡像，你需要配置 Personal Access Token (PAT)。你可以通過以下步驟生成並配置 PAT：
+
+1. 前往 GitHub 並導航到 Settings > Developer settings > Personal access tokens。
+2. 生成一個新的 PAT，並勾選 `write:packages` 和 `read:packages` 權限。
+3. 在你本地的環境中，運行以下命令登錄 GHCR：
+
+    ```bash
+    echo <YOUR_PAT> | docker login ghcr.io -u <YOUR_GITHUB_USERNAME> --password-stdin
+    ```
+
+    將 `<YOUR_PAT>` 替換為你的 PAT，將 `<YOUR_GITHUB_USERNAME>` 替換為你的 GitHub 用戶名。
+
+5. **MongoDB 卷的權限管理**
+
+在 MongoDB 服務中，我們使用了特定的用戶和組來管理卷的權限。確保你正確設置了卷的權限以避免容器訪問問題：
+
+在宿主機上，確保目錄擁有正確的權限：
+
+```bash
+sudo chown -R 1000:1000 ../mongodb/configdb
+sudo chown -R 1000:1000 ../mongodb/data
+```
+
+這將確保 MongoDB 容器可以正確讀取和寫入配置和數據卷。
