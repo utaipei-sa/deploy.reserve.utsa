@@ -41,7 +41,7 @@
 
 ## 使用指南
 
-1. **設置環境變量**：
+### 1. **設置環境變量**：
    - 在開始使用之前，覆制 `.env.sample` 文件為 `.env`，並根據項目的實際需求填入對應的配置。
 
    ```bash
@@ -49,7 +49,7 @@
    # 然後編輯 .env 文件並填入相關環境變量
    ```
 
-2. **初始化服務**：
+### 2. **初始化服務**：
    - 執行以下命令來啟動所有服務。你需要指定後端和前端的版本號：
 
    ```bash
@@ -62,7 +62,7 @@
    ./scripts/cicd.sh SERVICE_UP 1.0.0 1.0.0-test
    ```
 
-3. **更新鏡像**：
+### 3. **更新鏡像**：
    - 當需要更新服務鏡像並重啟 Nginx 時，執行以下命令並指定新的後端和前端版本號：
 
    ```bash
@@ -75,7 +75,7 @@
    ./scripts/cicd.sh UPDATE_IMAGE 1.1.0 1.1.0-test
    ```
 
-4. **GitHub Container Registry（GHCR）授權**
+### 4. **GitHub Container Registry（GHCR）授權**
 
 要從 GHCR 拉取鏡像，你需要配置 Personal Access Token (PAT)。你可以通過以下步驟生成並配置 PAT：
 
@@ -89,7 +89,7 @@
 
     將 `<YOUR_PAT>` 替換為你的 PAT，將 `<YOUR_GITHUB_USERNAME>` 替換為你的 GitHub 用戶名。
 
-5. **MongoDB 卷的權限管理(linux問題)**
+### 5. **MongoDB 卷的權限管理(linux問題)**
 
 在 MongoDB 服務中，我們使用了特定的用戶和組來管理卷的權限。確保你正確設置了卷的權限以避免容器訪問問題：
 
