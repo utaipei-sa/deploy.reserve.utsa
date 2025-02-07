@@ -11,19 +11,23 @@ if [ "$CMD" == "SERVICE_UP" -a "$#" == "3" ]; then
     echo "Run SERVICE_UP(BUILD_BACKEND_VERSION=$BUILD_BACKEND_VERSION, BUILD_FRONTEND_VERSION=$BUILD_FRONTEND_VERSION)"
     export BACKEND_VERSION=$BUILD_BACKEND_VERSION 
     export FRONTEND_VERSION=$BUILD_FRONTEND_VERSION
-    docker-compose  -p $DOCKER_COMPOSE_NAMESPACE \
+    docker compose  -p $DOCKER_COMPOSE_NAMESPACE \
                     -f docker/docker-compose-db.yaml \
                     -f docker/docker-compose-api.yaml \
                     -f docker/docker-compose-ui.yaml \
                     --env-file .env -f docker/docker-compose-nginx.yaml up -d 
-
+    echo "restart nginx"
+    docker restart nginx
+    echo "delete old images"
+    docker image prune -a -f
+    
 elif [ "$CMD" == "UPDATE_IMAGE" -a "$#" == "3" ]; then
     BUILD_BACKEND_VERSION=${2}
     BUILD_FRONTEND_VERSION=${3}
     echo "Run UPDATE_IMAGE(BUILD_BACKEND_VERSION=$BUILD_BACKEND_VERSION, BUILD_FRONTEND_VERSION=$BUILD_FRONTEND_VERSION)"
     export BACKEND_VERSION=$BUILD_BACKEND_VERSION 
     export FRONTEND_VERSION=$BUILD_FRONTEND_VERSION
-    docker-compose  -p $DOCKER_COMPOSE_NAMESPACE \
+    docker compose  -p $DOCKER_COMPOSE_NAMESPACE \
                     -f docker/docker-compose-api.yaml\
                     -f docker/docker-compose-ui.yaml up -d 
     echo "restart nginx"
